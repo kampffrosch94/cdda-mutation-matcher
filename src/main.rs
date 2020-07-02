@@ -9,6 +9,8 @@ struct Mutation {
     name: Name,
     #[serde(default)]
     cancels: Vec<String>,
+    #[serde(default)]
+    category: Vec<String>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -22,7 +24,7 @@ fn main() -> anyhow::Result<()>{
     data.sort_by_key(|it| it.name.str.clone());
     for d in data.iter() {
         let mut cancellers = vec![];
-        for x in data.iter() {
+        for x in data.iter().filter(|it| !it.category.is_empty()) {
             if x.cancels.contains(&d.id) {
                 cancellers.push(x.name.str.clone())
             }
