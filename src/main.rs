@@ -31,7 +31,7 @@ fn main() -> anyhow::Result<()> {
         for x in data.iter().filter(|it| !it.category.is_empty()) {
             if x.cancels.contains(&d.id) {
                 if !x.threshreq.is_empty() {
-                    cancellers.push(format!("{} ({})", x.name.str.clone(), x.threshreq[0]));
+                    cancellers.push(format!("{} (threshold)", x.name.str.clone()));
                 } else {
                     cancellers.push(x.name.str.clone())
                 }
